@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 export default function Banner() {
   return (
     <section className="lg:max-w-6xl mx-auto flex flex-col z-0 items-center justify-center py-28 sm:pt-32 transition-all animate-in">
-      <h1 className="py-6 text-center">
+      <h1 className="py-8 text-center">
         Turn your posts into{" "}
         <span className="underline underline-offset-8 decoration-dashed decoration-purple-500">
           captivating

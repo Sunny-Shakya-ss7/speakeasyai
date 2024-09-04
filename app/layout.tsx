@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/home/header";
 
-const fontSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "700"] });
+const fontSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontSans.className}>{children}</body>
+      <body className={fontSans.className}>
+        <Header></Header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
