@@ -4,11 +4,12 @@ import { z } from "zod";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useToast } from "@/hooks/use-toast";
+
+import { useUploadThing } from "@/utils/uploadthing";
 import {
   generateBlogPostAction,
   transcribeUploadedFile,
 } from "@/actions/upload-actions";
-import { useUploadThing } from "@/utils/uploadthing";
 
 const schema = z.object({
   file: z
