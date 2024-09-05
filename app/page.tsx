@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Banner from "@/components/home/banner";
 import BgGradient from "@/components/common/bg-gradient";
 import { Dot } from "lucide-react";

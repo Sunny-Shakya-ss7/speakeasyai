@@ -62,7 +62,7 @@ export default function Pricing() {
                         href={paymentLink}
                         className="flex gap-1 items-center"
                       >
-                        Get SpeakEasy <ArrowRight size={18} />
+                        Get BlabberBlog <ArrowRight size={18} />
                       </Link>
                     </Button>
                   </div>

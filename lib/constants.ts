@@ -2,7 +2,7 @@ export const plansMap = [
   {
     id: "basic",
     name: "Basic",
-    description: "Get started with SpeakEasy!",
+    description: "Get started with BlabberBlog!",
     price: "10",
     items: ["3 Blog Posts", "3 Transcription"],
     paymentLink: "https://buy.stripe.com/test_aEU9D35X65fH0MMeUW",
@@ -28,4 +28,4 @@ export const plansMap = [
 export const ORIGIN_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://speakeasyai-demo.vercel.app";
+    : "https://BlabberBlog-demo.vercel.app";
