@@ -2,7 +2,7 @@ export const plansMap = [
   {
     id: "starter",
     name: "Free",
-    description: "Get started with BlabberBlog!",
+    description: "Just sign up and get started with BlabberBlog!",
     price: "0",
     items: ["3 Blog Posts", "3 Transcription"],
     paymentLink: "https://buy.stripe.com/test_8wMg119dr98Y9ri289",

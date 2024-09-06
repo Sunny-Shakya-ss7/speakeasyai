@@ -1,8 +1,12 @@
+"use client";
+
 import { ArrowRight, CheckIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { plansMap } from "@/lib/constants";
+import { SignedIn } from "@clerk/nextjs";
+import { SignedOut } from "@clerk/clerk-react";
 
 export default function Pricing() {
   return (
@@ -58,12 +62,29 @@ export default function Pricing() {
                         id === "pro" && "border-amber-300 px-4"
                       )}
                     >
-                      <Link
+                      {/* <Link
                         href={paymentLink}
                         className="flex gap-1 items-center"
                       >
                         Get BlabberBlog <ArrowRight size={18} />
-                      </Link>
+                      </Link> */}
+
+                      {name === "Free" ? (
+                        <Link
+                          href="/sign-up"
+                          className="flex gap-1 items-center"
+                        >
+                          <SignedIn>On Free Plan</SignedIn>
+                          <SignedOut>Get Free Plan</SignedOut>
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/#pricing"
+                          className="flex gap-1 items-center"
+                        >
+                          Coming Soon
+                        </Link>
+                      )}
                     </Button>
                   </div>
                 </div>
