@@ -1,9 +1,9 @@
 export const plansMap = [
   {
-    id: "basic",
-    name: "Basic",
+    id: "starter",
+    name: "Free",
     description: "Get started with BlabberBlog!",
-    price: "10",
+    price: "0",
     items: ["3 Blog Posts", "3 Transcription"],
     paymentLink: "https://buy.stripe.com/test_8wMg119dr98Y9ri289",
     priceId:
@@ -15,7 +15,7 @@ export const plansMap = [
     id: "pro",
     name: "Pro",
     description: "All Blog Posts, let’s go!",
-    price: "19.99",
+    price: "10.00",
     items: ["Unlimited Blog Posts", "Unlimited Transcriptions"],
     paymentLink: "https://buy.stripe.com/test_bIYcOPcpDbh646YeUU",
     priceId:
@@ -28,4 +28,4 @@ export const plansMap = [
 export const ORIGIN_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://BlabberBlog-demo.vercel.app";
+    : "https://BlabberBlog.vercel.app";
