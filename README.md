@@ -4,6 +4,11 @@
   <img src="https://github.com/Sunny-Shakya-ss7/speakeasyai/blob/master/public/BlabberBlog.png" title="BlabberBlog">
 </p>
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/7CfItpdO-x4/0.jpg)](https://www.youtube.com/watch?v=7CfItpdO-x4)
+
+https://www.youtube.com/watch?v=7CfItpdO-x4
+https://youtu.be/7CfItpdO-x4
+
 An end-to-end full-stack AI SaaS app that converts your video into a Blog Post in seconds with the power of AI! This app is built with the Next.js 14 App Router, Clerk for Auth - with Passkeys, Github and Google Sign in, React, OpenAI - Whisper API, ShadCN UI library for components, React Markdown, NeonDb for databases, UploadThing, Stripe for payments, Webhooks, TypeScript, TailwindCSS and more.
 
 
