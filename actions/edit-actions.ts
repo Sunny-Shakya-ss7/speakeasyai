@@ -20,10 +20,12 @@ export async function updatePostAction(data: {
     const sql = await getDbConnection();
 
     const [title, ...contentParts] = content?.split("\n\n") || [];
+    console.log(title.split("#")[1]);
     const updatedTitle = title.split("#")[1].trim();
 
     await sql`UPDATE posts SET content = ${content}, title = ${updatedTitle} where id = ${postId}`;
   } catch (error) {
+    console.log(error);
     console.error("Error occurred in updating the post", postId);
     return {
       success: false,

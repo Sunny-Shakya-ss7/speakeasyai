@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/home/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ORIGIN_URL } from "@/lib/constants";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
         <body className={fontSans.className}>
           <Header></Header>
           <main>{children}</main>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

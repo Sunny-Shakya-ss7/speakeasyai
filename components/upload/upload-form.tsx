@@ -10,6 +10,7 @@ import {
   generateBlogPostAction,
   transcribeUploadedFile,
 } from "@/actions/upload-actions";
+import { useState } from "react";
 
 const schema = z.object({
   file: z
@@ -26,6 +27,8 @@ const schema = z.object({
 });
 
 export default function UploadForm() {
+  const [loading, setLoading] = useState(false);
+
   const { toast } = useToast();
   const { startUpload } = useUploadThing("videoOrAudioUploader", {
     onClientUploadComplete: () => {
@@ -40,6 +43,7 @@ export default function UploadForm() {
   });
 
   const handleTranscribe = async (formData: FormData) => {
+    setLoading(true);
     const file = formData.get("file") as File;
 
     const validatedFields = schema.safeParse({ file });
@@ -60,7 +64,6 @@ export default function UploadForm() {
 
     if (file) {
       const resp: any = await startUpload([file]);
-      console.log({ resp });
 
       if (!resp) {
         toast({
@@ -93,7 +96,7 @@ export default function UploadForm() {
         });
 
         await generateBlogPostAction({
-          transcriptions: data,
+          transcriptions: data.transcriptions,
           userId: data.userId,
         });
 
@@ -102,6 +105,7 @@ export default function UploadForm() {
           description:
             "Time to put on your editor hat, Click the post and edit it!",
         });
+        setLoading(false);
       }
     }
   };
@@ -116,7 +120,9 @@ export default function UploadForm() {
           accept="audio/*,video/*"
           required
         />
-        <Button className="bg-purple-600">Transcribe</Button>
+        <Button className="bg-purple-600" onClick={() => setLoading(true)}>
+          {loading ? "Transcribing..." : "Transcribe"}
+        </Button>
       </div>
     </form>
   );

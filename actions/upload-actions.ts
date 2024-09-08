@@ -55,12 +55,10 @@ export async function transcribeUploadedFile(
     //   file: response,
     // });
 
-    const transcript = await assemblyai.transcripts.transcribe({
+    const transcriptions = await assemblyai.transcripts.transcribe({
       audio:
         "https://storage.googleapis.com/aai-web-samples/5_common_sports_injuries.mp3",
     });
-
-    const transcriptions = transcript.text;
 
     return {
       success: true,
@@ -149,7 +147,7 @@ Please convert the following transcription into a well-structured blog post usin
 7. Add a conclusion paragraph at the end.
 8. Ensure the content is informative, well-organized, and easy to read.
 9. Emulate my writing style, tone, and any recurring patterns you notice from my previous posts.
-10. Write the blog with the first line as a heading, followed by the content, with no introduction.
+10. Create a blog post in Markdown format. Start directly with the heading # [Blog Title], and follow it with the content. Do not include any introductory text before or after the blog.
 
 Here's the transcription to convert: ${transcriptions}`,
       },
@@ -165,7 +163,7 @@ export async function generateBlogPostAction({
   transcriptions,
   userId,
 }: {
-  transcriptions: string;
+  transcriptions: { text: string };
   userId: string;
 }) {
   const userPosts = await getUserBlogPosts(userId);
@@ -174,7 +172,7 @@ export async function generateBlogPostAction({
 
   if (transcriptions) {
     const blogPost = await generateBlogPost({
-      transcriptions: transcriptions,
+      transcriptions: transcriptions.text,
       userPosts,
     });
 
