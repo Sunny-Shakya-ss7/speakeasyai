@@ -8,7 +8,7 @@ An end-to-end full-stack AI SaaS app that converts your video into a Blog Post i
 ## Features
 
 - 🌐 Next.js 14 App Router & Server Actions
-- 🤖 OpenAI API for audio transcription and blog post generation
+- 🤖 OpenAI, Llama-3.1 & AssemblyAi API for audio transcription and blog post generation
 - 🔐 Authentication with Clerk (Passkeys, Github, and Google Sign-in)
 - 📝 AI-powered blog post generation based on audio transcription
 - 💳 Stripe integration for payments and subscription management
