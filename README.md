@@ -1,4 +1,4 @@
-## Introduction
+# SpeakEasyAI - Convert your video or voice into a Blog Post in seconds with the power of AI!
 
 An end-to-end full-stack AI SaaS app that converts your video into a Blog Post in seconds with the power of AI! This app is built with the Next.js 14 App Router, Clerk for Auth - with Passkeys, Github and Google Sign in, React, OpenAI - Whisper API, ShadCN UI library for components, React Markdown, NeonDb for databases, UploadThing, Stripe for payments, Webhooks, TypeScript, TailwindCSS and more.
 
