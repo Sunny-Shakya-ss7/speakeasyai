@@ -15,6 +15,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
+const assemblyai = new AssemblyAI({
+  apiKey: process.env.NEXT_PUBLIC_ASSEMBLY_AI_API_KEY,
+});
+
 export async function transcribeUploadedFile(
   resp: {
     serverData: { userId: string; file: any };
@@ -51,29 +55,12 @@ export async function transcribeUploadedFile(
     //   file: response,
     // });
 
-    const client = new AssemblyAI({
-      apiKey: "65a59186e429469dae7182b737eaec2a",
-    });
-
-    const transcript = await client.transcripts.transcribe({
+    const transcript = await assemblyai.transcripts.transcribe({
       audio:
         "https://storage.googleapis.com/aai-web-samples/5_common_sports_injuries.mp3",
     });
 
     const transcriptions = transcript.text;
-
-    // const transcriptions = await axios.post(
-    //   "https://api-inference.huggingface.co/models/openai/whisper-large",
-    //   {
-    //     inputs: "../public/videoplayback.mp4",
-    //     options: { wait_for_model: true },
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGING_FACE_API_KEY}`,
-    //     },
-    //   }
-    // );
 
     return {
       success: true,
@@ -162,6 +149,7 @@ Please convert the following transcription into a well-structured blog post usin
 7. Add a conclusion paragraph at the end.
 8. Ensure the content is informative, well-organized, and easy to read.
 9. Emulate my writing style, tone, and any recurring patterns you notice from my previous posts.
+10. Write the blog with the first line as a heading, followed by the content, with no introduction.
 
 Here's the transcription to convert: ${transcriptions}`,
       },
