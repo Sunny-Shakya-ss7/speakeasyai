@@ -16,7 +16,7 @@ const openai = new OpenAI({
 });
 
 const assemblyai = new AssemblyAI({
-  apiKey: process.env.NEXT_PUBLIC_ASSEMBLY_AI_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_ASSEMBLY_AI_API_KEY!,
 });
 
 export async function transcribeUploadedFile(
@@ -165,7 +165,7 @@ export async function generateBlogPostAction({
   transcriptions,
   userId,
 }: {
-  transcriptions: { text: string };
+  transcriptions: string;
   userId: string;
 }) {
   const userPosts = await getUserBlogPosts(userId);
