@@ -3,9 +3,16 @@ import getDbConnection from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import OpenAI from "openai";
+import { AssemblyAI } from "assemblyai";
+const axios = require("axios");
+
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
 });
 
 export async function transcribeUploadedFile(
@@ -39,12 +46,35 @@ export async function transcribeUploadedFile(
   const response = await fetch(fileUrl);
 
   try {
-    const transcriptions = await openai.audio.transcriptions.create({
-      model: "whisper-1",
-      file: response,
+    // const transcriptions = await openai.audio.transcriptions.create({
+    //   model: "whisper-1",
+    //   file: response,
+    // });
+
+    const client = new AssemblyAI({
+      apiKey: "65a59186e429469dae7182b737eaec2a",
     });
 
-    console.log({ transcriptions });
+    const transcript = await client.transcripts.transcribe({
+      audio:
+        "https://storage.googleapis.com/aai-web-samples/5_common_sports_injuries.mp3",
+    });
+
+    const transcriptions = transcript.text;
+
+    // const transcriptions = await axios.post(
+    //   "https://api-inference.huggingface.co/models/openai/whisper-large",
+    //   {
+    //     inputs: "../public/videoplayback.mp4",
+    //     options: { wait_for_model: true },
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGING_FACE_API_KEY}`,
+    //     },
+    //   }
+    // );
+
     return {
       success: true,
       message: "File uploaded successfully!",
@@ -88,9 +118,9 @@ async function getUserBlogPosts(userId: string) {
   try {
     const sql = await getDbConnection();
     const posts = await sql`
-    SELECT content FROM posts 
-    WHERE user_id = ${userId} 
-    ORDER BY created_at DESC 
+    SELECT content FROM posts
+    WHERE user_id = ${userId}
+    ORDER BY created_at DESC
     LIMIT 3
   `;
     return posts.map((post) => post.content).join("\n\n");
@@ -108,6 +138,7 @@ async function generateBlogPost({
   userPosts: string;
 }) {
   const completion = await openai.chat.completions.create({
+    model: "meta-llama/llama-3.1-8b-instruct:free",
     messages: [
       {
         role: "system",
@@ -135,13 +166,13 @@ Please convert the following transcription into a well-structured blog post usin
 Here's the transcription to convert: ${transcriptions}`,
       },
     ],
-    model: "gpt-4o-mini",
     temperature: 0.7,
     max_tokens: 1000,
   });
 
   return completion.choices[0].message.content;
 }
+
 export async function generateBlogPostAction({
   transcriptions,
   userId,
@@ -155,7 +186,7 @@ export async function generateBlogPostAction({
 
   if (transcriptions) {
     const blogPost = await generateBlogPost({
-      transcriptions: transcriptions.text,
+      transcriptions: transcriptions,
       userPosts,
     });
 
@@ -167,8 +198,6 @@ export async function generateBlogPostAction({
     }
 
     const [title, ...contentParts] = blogPost?.split("\n\n") || [];
-
-    //database connection
 
     if (blogPost) {
       postId = await saveBlogPost(userId, title, blogPost);

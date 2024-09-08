@@ -27,7 +27,6 @@ const schema = z.object({
 
 export default function UploadForm() {
   const { toast } = useToast();
-
   const { startUpload } = useUploadThing("videoOrAudioUploader", {
     onClientUploadComplete: () => {
       toast({ title: "uploaded successfully!" });
@@ -94,7 +93,7 @@ export default function UploadForm() {
         });
 
         await generateBlogPostAction({
-          transcriptions: data.transcriptions,
+          transcriptions: data,
           userId: data.userId,
         });
 
@@ -106,6 +105,7 @@ export default function UploadForm() {
       }
     }
   };
+
   return (
     <form className="flex flex-col gap-6" action={handleTranscribe}>
       <div className="flex justify-end items-center gap-1.5">
