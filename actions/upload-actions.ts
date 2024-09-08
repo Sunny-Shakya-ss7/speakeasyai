@@ -16,7 +16,7 @@ const openai = new OpenAI({
 });
 
 const assemblyai = new AssemblyAI({
-  apiKey: process.env.NEXT_PUBLIC_ASSEMBLY_AI_API_KEY!,
+  apiKey: process.env.NEXT_PUBLIC_ASSEMBLY_AI_API_KEY as string,
 });
 
 export async function transcribeUploadedFile(
